@@ -1,0 +1,9 @@
+{
+  "title": "Book",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    }
+  }
+}

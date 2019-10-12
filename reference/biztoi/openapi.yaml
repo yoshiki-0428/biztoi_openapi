@@ -1,0 +1,102 @@
+openapi: 3.0.0
+info:
+  title: BizToi
+  version: '1.0'
+  description: BizToi API
+  contact:
+    name: BizToi
+servers:
+  - url: 'http://localhost:8000/api/'
+paths:
+  /auth/login:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '303':
+          description: See Other
+      description: ログイン画面に遷移する
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: redirect_uri
+          description: リダイレクト対象URL
+          required: true
+  /auth/token:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                description: ''
+      description: アクセストークン取得
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: code
+          description: AWS Cognitoより返却される認証コード
+          required: true
+  /users/me:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/user.v1.json
+      description: ユーザ情報
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: code
+          required: true
+  /books/list:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./models/book.v1.json
+      description: すべての本を取得
+  '/books/{book_id}':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+    post:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/book.v1.json
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ./models/book.v1.json
+components:
+  schemas: {}
+  securitySchemes: {}
