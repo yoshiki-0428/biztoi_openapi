@@ -4,6 +4,21 @@
   "properties": {
     "id": {
       "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "isbn": {
+      "type": "string"
+    },
+    "detail": {
+      "type": "string"
+    },
+    "picture_url": {
+      "type": "string"
+    },
+    "link_url": {
+      "type": "string"
     }
   }
 }

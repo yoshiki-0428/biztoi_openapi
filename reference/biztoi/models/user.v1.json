@@ -4,6 +4,18 @@
   "properties": {
     "id": {
       "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "picture_url": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "": {
+      "type": "string"
     }
   }
 }
