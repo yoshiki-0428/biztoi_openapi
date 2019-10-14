@@ -1,0 +1,36 @@
+{
+  "title": "Toi",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "book_id": {
+      "type": "string"
+    },
+    "picture_url": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "detail": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "public_flg": {
+      "type": "string"
+    },
+    "inserted": {
+      "type": "string"
+    },
+    "modified": {
+      "type": "string"
+    }
+  }
+}

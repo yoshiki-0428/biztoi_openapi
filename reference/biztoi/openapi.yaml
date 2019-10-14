@@ -2,26 +2,84 @@ openapi: 3.0.0
 info:
   title: BizToi
   version: '1.0'
-  description: BizToi API
   contact:
     name: BizToi
+  description: BizToi API
 servers:
   - url: 'http://localhost:8000/api/'
 paths:
-  /auth/login:
+  '/books/{book_id}':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+    post:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/book.v1.json
+              examples: {}
+      description: 本の情報を作成する、本、問題、質問が作成されていない場合作成を行う
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ./models/book.v1.json
+  /books/list:
     get:
       summary: Your GET endpoint
       tags: []
       responses:
-        '303':
-          description: See Other
-      description: ログイン画面に遷移する
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./models/book.v1.json
+      description: 本を取得
+      parameters:
+        - schema:
+            type: string
+            default: MOST_POPULAR
+            enum:
+              - MOST_POPULAR
+              - NEWEST
+              - YOUR_LIST
+          in: query
+          name: sort
+          required: true
+          description: ''
+        - schema:
+            type: string
+            default: '20'
+          in: query
+          name: limit
+          required: true
+  /users/me:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/user.v1.json
+      description: ユーザ情報
       parameters:
         - schema:
             type: string
           in: query
-          name: redirect_uri
-          description: リダイレクト対象URL
+          name: code
           required: true
   /auth/token:
     get:
@@ -43,25 +101,22 @@ paths:
           name: code
           description: AWS Cognitoより返却される認証コード
           required: true
-  /users/me:
+  /auth/login:
     get:
       summary: Your GET endpoint
       tags: []
       responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: ./models/user.v1.json
-      description: ユーザ情報
+        '303':
+          description: See Other
+      description: ログイン画面に遷移する
       parameters:
         - schema:
             type: string
           in: query
-          name: code
+          name: redirect_uri
+          description: リダイレクト対象URL
           required: true
-  /books/list:
+  '/books/{book_id}/toi/list':
     get:
       summary: Your GET endpoint
       tags: []
@@ -73,30 +128,38 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ./models/book.v1.json
-      description: すべての本を取得
-  '/books/{book_id}':
+                  $ref: ./models/toi.v1.json
+      description: 本に紐づく問題を取得する
     parameters:
       - schema:
           type: string
         name: book_id
         in: path
+        description: ''
         required: true
-    post:
-      summary: ''
+  '/books/{book_id}/toi/{toi_id}/questions/list':
+    parameters:
+      - type: string
+        name: book_id
+        in: path
+        required: true
+      - type: string
+        name: toi_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: ./models/book.v1.json
-      description: ''
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ./models/book.v1.json
+                type: array
+                items:
+                  $ref: ./models/question.v1.json
+      description: 本と問題に紐づく質問の取得
 components:
   schemas: {}
   securitySchemes: {}

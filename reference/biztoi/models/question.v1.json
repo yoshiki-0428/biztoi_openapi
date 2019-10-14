@@ -1,27 +1,33 @@
 {
-  "title": "Book",
+  "title": "Question",
   "type": "object",
   "properties": {
     "id": {
       "type": "string"
     },
-    "isbn": {
+    "toi_id": {
+      "type": "string"
+    },
+    "title": {
       "type": "string"
     },
     "detail": {
       "type": "string"
     },
-    "picture_url": {
+    "timing": {
       "type": "string"
     },
-    "link_url": {
+    "required": {
       "type": "string"
     },
-    "title": {
+    "order_id": {
+      "type": "string"
+    },
+    "inserted": {
+      "type": "string"
+    },
+    "modified": {
       "type": "string"
     }
-  },
-  "required": [
-    "id"
-  ]
+  }
 }
