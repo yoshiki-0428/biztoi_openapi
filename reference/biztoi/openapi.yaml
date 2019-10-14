@@ -137,13 +137,15 @@ paths:
         in: path
         description: ''
         required: true
-  '/books/{book_id}/toi/{toi_id}/questions/list':
+  '/books/{book_id}/toi/{toi_id}/questions/list/':
     parameters:
-      - type: string
+      - schema:
+          type: string
         name: book_id
         in: path
         required: true
-      - type: string
+      - schema:
+          type: string
         name: toi_id
         in: path
         required: true
@@ -153,12 +155,6 @@ paths:
       responses:
         '200':
           description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: ./models/question.v1.json
       description: 本と問題に紐づく質問の取得
 components:
   schemas: {}
