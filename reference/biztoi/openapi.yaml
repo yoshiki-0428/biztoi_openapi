@@ -137,13 +137,8 @@ paths:
         in: path
         description: ''
         required: true
-  '/books/{book_id}/toi/{toi_id}/questions/list/':
+  '/toi/{toi_id}/questions/list/':
     parameters:
-      - schema:
-          type: string
-        name: book_id
-        in: path
-        required: true
       - schema:
           type: string
         name: toi_id
@@ -155,7 +150,31 @@ paths:
       responses:
         '200':
           description: OK
-      description: 本と問題に紐づく質問の取得
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./models/toi.v1.json
+      description: 問題に紐づく質問の取得
+  '/toi/{toi_id}/answers/list/':
+    parameters:
+      - schema:
+          type: string
+        name: toi_id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/answerhead.v1.json
+      description: 本と問題に紐づく回答の取得
 components:
   schemas: {}
   securitySchemes: {}

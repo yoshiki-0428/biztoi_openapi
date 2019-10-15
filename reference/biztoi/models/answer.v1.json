@@ -1,29 +1,33 @@
 {
-  "title": "Book",
+  "title": "Answer",
   "type": "object",
   "properties": {
     "id": {
       "type": "string"
     },
-    "isbn": {
+    "answer_head_id": {
       "type": "string"
     },
-    "detail": {
+    "question_id": {
       "type": "string"
     },
     "picture_url": {
       "type": "string"
     },
-    "link_url": {
+    "answer": {
       "type": "string"
     },
-    "title": {
+    "inserted": {
+      "type": "string"
+    },
+    "modified": {
       "type": "string"
     }
   },
   "required": [
-    "id",
-    "detail",
-    "title"
+    "answer_head_id",
+    "question_id",
+    "answer",
+    "inserted"
   ]
 }

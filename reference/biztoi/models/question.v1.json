@@ -29,5 +29,15 @@
     "modified": {
       "type": "string"
     }
-  }
+  },
+  "required": [
+    "id",
+    "toi_id",
+    "title",
+    "detail",
+    "timing",
+    "required",
+    "order_id",
+    "inserted"
+  ]
 }

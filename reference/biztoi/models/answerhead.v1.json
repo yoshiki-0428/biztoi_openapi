@@ -1,5 +1,5 @@
 {
-  "title": "Toi",
+  "title": "AnswerHead",
   "type": "object",
   "properties": {
     "id": {
@@ -8,22 +8,10 @@
     "user_id": {
       "type": "string"
     },
-    "book_id": {
+    "toi_id": {
       "type": "string"
     },
-    "picture_url": {
-      "type": "string"
-    },
-    "title": {
-      "type": "string"
-    },
-    "detail": {
-      "type": "string"
-    },
-    "content": {
-      "type": "string"
-    },
-    "public_flg": {
+    "publish_flg": {
       "type": "string"
     },
     "inserted": {
@@ -31,15 +19,19 @@
     },
     "modified": {
       "type": "string"
+    },
+    "answers": {
+      "type": "array",
+      "items": {
+        "$ref": ""
+      }
     }
   },
   "required": [
     "id",
     "user_id",
-    "book_id",
-    "title",
-    "detail",
-    "public_flg",
+    "toi_id",
+    "publish_flg",
     "inserted"
   ]
 }

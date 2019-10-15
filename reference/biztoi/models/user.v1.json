@@ -13,9 +13,11 @@
     },
     "email": {
       "type": "string"
-    },
-    "": {
-      "type": "string"
     }
-  }
+  },
+  "required": [
+    "id",
+    "name",
+    "email"
+  ]
 }
