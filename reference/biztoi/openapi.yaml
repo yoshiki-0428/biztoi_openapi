@@ -6,17 +6,12 @@ info:
     name: BizToi
   description: BizToi API
 servers:
-  - url: 'http://localhost:8000/api/'
+  - url: 'http://localhost:8000/api'
 paths:
-  '/books/{book_id}':
-    parameters:
-      - schema:
-          type: string
-        name: book_id
-        in: path
-        required: true
+  /books/create:
+    parameters: []
     post:
-      summary: ''
+      summary: Book Create
       responses:
         '200':
           description: OK
@@ -31,9 +26,11 @@ paths:
           application/json:
             schema:
               $ref: ./models/book.v1.json
-  /books/list:
+      operationId: BookCreate
+      tags: []
+  /books:
     get:
-      summary: Your GET endpoint
+      summary: Book List
       tags: []
       responses:
         '200':
@@ -44,28 +41,13 @@ paths:
                 type: array
                 items:
                   $ref: ./models/book.v1.json
-      description: 本を取得
-      parameters:
-        - schema:
-            type: string
-            default: MOST_POPULAR
-            enum:
-              - MOST_POPULAR
-              - NEWEST
-              - YOUR_LIST
-          in: query
-          name: sort
-          required: true
-          description: ''
-        - schema:
-            type: string
-            default: '20'
-          in: query
-          name: limit
-          required: true
+      description: すべての本を取得
+      parameters: []
+      operationId: Books
+    parameters: []
   /users/me:
     get:
-      summary: Your GET endpoint
+      summary: User info
       tags: []
       responses:
         '200':
@@ -81,9 +63,10 @@ paths:
           in: query
           name: code
           required: true
+      operationId: UserInfo
   /auth/token:
     get:
-      summary: Your GET endpoint
+      summary: Auth Get Token
       tags: []
       responses:
         '200':
@@ -101,11 +84,14 @@ paths:
           name: code
           description: AWS Cognitoより返却される認証コード
           required: true
+      operationId: AuthGetToken
   /auth/login:
     get:
-      summary: Your GET endpoint
+      summary: Auth Login
       tags: []
       responses:
+        '200':
+          description: ''
         '303':
           description: See Other
       description: ログイン画面に遷移する
@@ -116,9 +102,10 @@ paths:
           name: redirect_uri
           description: リダイレクト対象URL
           required: true
-  '/books/{book_id}/toi/list':
+      operationId: AuthLogin
+  '/toi/{book_id}':
     get:
-      summary: Your GET endpoint
+      summary: Toi List
       tags: []
       responses:
         '200':
@@ -130,6 +117,7 @@ paths:
                 items:
                   $ref: ./models/toi.v1.json
       description: 本に紐づく問題を取得する
+      operationId: ToiList
     parameters:
       - schema:
           type: string
@@ -137,7 +125,7 @@ paths:
         in: path
         description: ''
         required: true
-  '/toi/{toi_id}/questions/list/':
+  '/questions/{toi_id}':
     parameters:
       - schema:
           type: string
@@ -145,7 +133,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
+      summary: Qustions List
       tags: []
       responses:
         '200':
@@ -157,7 +145,8 @@ paths:
                 items:
                   $ref: ./models/toi.v1.json
       description: 問題に紐づく質問の取得
-  '/toi/{toi_id}/answers/list/':
+      operationId: QustionsList
+  '/answers/{toi_id}':
     parameters:
       - schema:
           type: string
@@ -165,7 +154,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
+      summary: Answers List
       tags: []
       responses:
         '200':
@@ -175,6 +164,56 @@ paths:
               schema:
                 $ref: ./models/answerhead.v1.json
       description: 本と問題に紐づく回答の取得
+      operationId: AnswersList
+  /books/favorite:
+    get:
+      summary: Book Favorite List
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ./models/book.v1.json
+      description: お気に入りの本を取得
+      parameters: []
+      operationId: BooksFavorite
+    parameters: []
+    post:
+      summary: Book Favorite List Post
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ./models/bookfavorite.v1.json
+      parameters: []
+      description: 本をお気に入り登録する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ./models/bookfavorite.v1.json
+        description: ''
+      operationId: BooksFavoritePost
+      tags: []
+    delete:
+      summary: Book Favorite List Delete
+      responses:
+        '200':
+          description: OK
+      description: お気に入りを取り消しする
+      operationId: BooksFavoriteDelete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ./models/bookfavorite.v1.json
+      tags: []
 components:
   schemas: {}
   securitySchemes: {}
