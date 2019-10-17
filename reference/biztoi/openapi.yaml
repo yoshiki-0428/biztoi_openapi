@@ -18,14 +18,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./models/book.v1.json
+                $ref: '#/components/schemas/Book'
               examples: {}
       description: 本の情報を作成する、本、問題、質問が作成されていない場合作成を行う
       requestBody:
         content:
           application/json:
             schema:
-              $ref: ./models/book.v1.json
+              $ref: '#/components/schemas/Book'
       operationId: BookCreate
       tags: []
   /books:
@@ -40,7 +40,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ./models/book.v1.json
+                  $ref: '#/components/schemas/Book'
               examples:
                 example:
                   value:
@@ -64,7 +64,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./models/user.v1.json
+                $ref: '#/components/schemas/User'
       description: ユーザ情報
       parameters:
         - schema:
@@ -124,7 +124,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ./models/toi.v1.json
+                  $ref: '#/components/schemas/Toi'
       description: 本に紐づく問題を取得する
       operationId: ToiList
     parameters:
@@ -152,7 +152,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ./models/toi.v1.json
+                  $ref: '#/components/schemas/Toi'
       description: 問題に紐づく質問の取得
       operationId: QustionsList
   '/answers/{toi_id}':
@@ -171,7 +171,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./models/answerhead.v1.json
+                $ref: '#/components/schemas/AnswerHead'
       description: 本と問題に紐づく回答の取得
       operationId: AnswersList
   /books/favorite:
@@ -186,7 +186,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: ./models/book.v1.json
+                  $ref: '#/components/schemas/Book'
       description: お気に入りの本を取得
       parameters: []
       operationId: BooksFavorite
@@ -199,14 +199,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ./models/bookfavorite.v1.json
+                $ref: '#/components/schemas/BookFavorite'
       parameters: []
       description: 本をお気に入り登録する
       requestBody:
         content:
           application/json:
             schema:
-              $ref: ./models/bookfavorite.v1.json
+              $ref: '#/components/schemas/BookFavorite'
         description: ''
       operationId: BooksFavoritePost
       tags: []
@@ -221,8 +221,164 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ./models/bookfavorite.v1.json
+              $ref: '#/components/schemas/BookFavorite'
       tags: []
 components:
-  schemas: {}
+  schemas:
+    Answer:
+      properties:
+        id:
+          type: string
+        answer_head_id:
+          type: string
+        question_id:
+          type: string
+        picture_url:
+          type: string
+        answer:
+          type: string
+        inserted:
+          type: string
+        modified:
+          type: string
+      required:
+        - answer_head_id
+        - question_id
+        - answer
+        - inserted
+      title: Answer
+      type: object
+    AnswerHead:
+      title: AnswerHead
+      type: object
+      properties:
+        id:
+          type: string
+        user_id:
+          type: string
+        toi_id:
+          type: string
+        publish_flg:
+          type: string
+        inserted:
+          type: string
+        modified:
+          type: string
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Answer'
+      required:
+        - id
+        - user_id
+        - toi_id
+        - publish_flg
+        - inserted
+    Book:
+      title: Book
+      type: object
+      required:
+        - id
+        - detail
+        - title
+      properties:
+        id:
+          type: string
+        isbn:
+          type: string
+        detail:
+          type: string
+        picture_url:
+          type: string
+        link_url:
+          type: string
+        title:
+          type: string
+    BookFavorite:
+      title: BookFavorite
+      type: object
+      properties:
+        book_id:
+          type: string
+        favorite_id:
+          type: string
+    Question:
+      title: Question
+      type: object
+      properties:
+        modified:
+          type: string
+        inserted:
+          type: string
+        order_id:
+          type: string
+        required:
+          type: string
+        timing:
+          type: string
+        detail:
+          type: string
+        title:
+          type: string
+        toi_id:
+          type: string
+        id:
+          type: string
+      required:
+        - id
+        - toi_id
+        - title
+        - detail
+        - timing
+        - required
+        - order_id
+        - inserted
+    Toi:
+      title: Toi
+      type: object
+      required:
+        - id
+        - user_id
+        - book_id
+        - title
+        - detail
+        - public_flg
+        - inserted
+      properties:
+        id:
+          type: string
+        user_id:
+          type: string
+        book_id:
+          type: string
+        picture_url:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        content:
+          type: string
+        public_flg:
+          type: string
+        inserted:
+          type: string
+        modified:
+          type: string
+    User:
+      title: User
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        picture_url:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - name
+        - email
   securitySchemes: {}
