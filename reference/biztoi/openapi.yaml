@@ -83,8 +83,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                description: ''
+                $ref: '#/components/schemas/Authorize'
       description: アクセストークン取得
       parameters:
         - schema:
@@ -381,4 +380,12 @@ components:
         - id
         - name
         - email
+    Authorize:
+      title: Authorize
+      type: object
+      properties:
+        access_token:
+          type: string
+      required:
+        - access_token
   securitySchemes: {}
