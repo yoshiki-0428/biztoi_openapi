@@ -225,13 +225,15 @@ paths:
 components:
   schemas:
     Answer:
+      title: Answer
+      type: object
       properties:
         id:
-          type: string
+          type: integer
         answer_head_id:
-          type: string
+          type: integer
         question_id:
-          type: string
+          type: integer
         picture_url:
           type: string
         answer:
@@ -245,20 +247,18 @@ components:
         - question_id
         - answer
         - inserted
-      title: Answer
-      type: object
     AnswerHead:
       title: AnswerHead
       type: object
       properties:
         id:
-          type: string
+          type: integer
         user_id:
           type: string
         toi_id:
-          type: string
+          type: integer
         publish_flg:
-          type: string
+          type: integer
         inserted:
           type: string
         modified:
@@ -276,13 +276,9 @@ components:
     Book:
       title: Book
       type: object
-      required:
-        - id
-        - detail
-        - title
       properties:
         id:
-          type: string
+          type: integer
         isbn:
           type: string
         detail:
@@ -293,63 +289,59 @@ components:
           type: string
         title:
           type: string
+      required:
+        - id
+        - detail
+        - title
     BookFavorite:
       title: BookFavorite
       type: object
       properties:
         book_id:
-          type: string
+          type: integer
         favorite_id:
-          type: string
+          type: integer
     Question:
       title: Question
       type: object
       properties:
-        modified:
-          type: string
-        inserted:
-          type: string
-        order_id:
-          type: string
-        required:
-          type: string
-        timing:
+        id:
+          type: integer
+        toi_id:
+          type: integer
+        title:
           type: string
         detail:
           type: string
-        title:
+        order_id:
+          type: integer
+        required:
+          type: integer
+        timing:
           type: string
-        toi_id:
+        inserted:
           type: string
-        id:
+        modified:
           type: string
       required:
         - id
         - toi_id
         - title
         - detail
-        - timing
-        - required
         - order_id
+        - required
+        - timing
         - inserted
     Toi:
       title: Toi
       type: object
-      required:
-        - id
-        - user_id
-        - book_id
-        - title
-        - detail
-        - public_flg
-        - inserted
       properties:
         id:
-          type: string
+          type: integer
         user_id:
           type: string
         book_id:
-          type: string
+          type: integer
         picture_url:
           type: string
         title:
@@ -359,11 +351,19 @@ components:
         content:
           type: string
         public_flg:
-          type: string
+          type: integer
         inserted:
           type: string
         modified:
           type: string
+      required:
+        - id
+        - user_id
+        - book_id
+        - title
+        - detail
+        - public_flg
+        - inserted
     User:
       title: User
       type: object
