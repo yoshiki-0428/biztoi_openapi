@@ -258,7 +258,7 @@ components:
         toi_id:
           type: integer
         publish_flg:
-          type: integer
+          type: boolean
         inserted:
           type: string
         modified:
@@ -316,7 +316,7 @@ components:
         order_id:
           type: integer
         required:
-          type: integer
+          type: boolean
         timing:
           type: string
         inserted:
@@ -350,8 +350,8 @@ components:
           type: string
         content:
           type: string
-        public_flg:
-          type: integer
+        publish_flg:
+          type: boolean
         inserted:
           type: string
         modified:
@@ -362,7 +362,7 @@ components:
         - book_id
         - title
         - detail
-        - public_flg
+        - publish_flg
         - inserted
     User:
       title: User
