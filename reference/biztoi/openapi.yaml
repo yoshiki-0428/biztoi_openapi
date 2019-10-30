@@ -8,26 +8,6 @@ info:
 servers:
   - url: 'http://localhost:8000/api'
 paths:
-  /books/create:
-    parameters: []
-    post:
-      summary: Book Create
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Book'
-              examples: {}
-      description: 本の情報を作成する、本、問題、質問が作成されていない場合作成を行う
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Book'
-      operationId: BookCreate
-      tags: []
   /books:
     get:
       summary: Book List
@@ -41,19 +21,24 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Book'
-              examples:
-                example:
-                  value:
-                    - id: AAAABBBB
-                      isbn: '1111100000'
-                      detail: これはDaigoの本です。これはDaigoの本です。これはDaigoの本です
-                      picture_url: 'http://books.google.com/books/content?id=NpBGDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api'
-                      link_url: 'https://google.com'
-                      title: メンタリストDaiGoのポジティブ辞典
+              examples: {}
       description: すべての本を取得
       parameters: []
       operationId: Books
     parameters: []
+    post:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+      description: 本の情報を作成する、本、問題、質問が作成されていない場合作成を行う
+      operationId: BooksPost
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      tags: []
   /users/me:
     get:
       summary: User info
@@ -111,37 +96,15 @@ paths:
           description: リダイレクト対象URL
           required: true
       operationId: AuthLogin
-  '/toi/{book_id}':
-    get:
-      summary: Toi List
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Toi'
-      description: 本に紐づく問題を取得する
-      operationId: ToiList
+  '/books/{book_id}/toi':
     parameters:
       - schema:
           type: string
         name: book_id
         in: path
-        description: ''
-        required: true
-  '/questions/{toi_id}':
-    parameters:
-      - schema:
-          type: string
-        name: toi_id
-        in: path
         required: true
     get:
-      summary: Qustions List
+      summary: Your GET endpoint
       tags: []
       responses:
         '200':
@@ -152,18 +115,83 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Toi'
-      description: 問題に紐づく質問の取得
-      operationId: QustionsList
-  '/answers/{toi_id}':
+      description: 本に紐づく問一覧を取得する
+      operationId: GetBookToi
+  '/books/{book_id}/toi/{toi_id}/questions':
     parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
       - schema:
           type: string
         name: toi_id
         in: path
         required: true
     get:
-      summary: Answers List
+      summary: GetBookQuestion
       tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/QuestionAnswer'
+      description: 本に紐づく質問一覧を取得する
+      operationId: GetBookQuestion
+  '/books/{book_id}/toi/{toi_id}/answers/{question_id}':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: toi_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: question_id
+        in: path
+        required: true
+    post:
+      summary: PostAnswer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Answer'
+      description: 回答ヘッダー情報の作成（回答し始めた際に作成される）
+      operationId: PostAnswer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Answer'
+      tags: []
+      parameters: []
+  '/books/{book_id}/toi/{toi_id}/answers':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: toi_id
+        in: path
+        required: true
+    post:
+      summary: PostAnswerHead
       responses:
         '200':
           description: OK
@@ -171,56 +199,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswerHead'
-      description: 本と問題に紐づく回答の取得
-      operationId: AnswersList
-  /books/favorite:
-    get:
-      summary: Book Favorite List
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
-      description: お気に入りの本を取得
-      parameters: []
-      operationId: BooksFavorite
-    parameters: []
-    post:
-      summary: Book Favorite List Post
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BookFavorite'
-      parameters: []
-      description: 本をお気に入り登録する
+      description: Answerを保存する
+      operationId: PostAnswerHead
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BookFavorite'
-        description: ''
-      operationId: BooksFavoritePost
-      tags: []
-    delete:
-      summary: Book Favorite List Delete
-      responses:
-        '200':
-          description: OK
-      description: お気に入りを取り消しする
-      operationId: BooksFavoriteDelete
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/BookFavorite'
+              $ref: '#/components/schemas/AnswerHead'
       tags: []
 components:
   schemas:
@@ -388,4 +373,12 @@ components:
           type: string
       required:
         - access_token
+    QuestionAnswer:
+      title: QuestionAnswer
+      type: object
+      properties:
+        question:
+          $ref: '#/components/schemas/Question'
+        answer:
+          $ref: '#/components/schemas/Answer'
   securitySchemes: {}
