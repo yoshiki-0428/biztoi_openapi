@@ -104,7 +104,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
+      summary: GetToi
       tags: []
       responses:
         '200':
@@ -206,6 +206,20 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AnswerHead'
+      tags: []
+    get:
+      summary: GetAnswers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnswerHead'
+      operationId: GetAnswers
+      description: 他の回答一覧を取得
       tags: []
 components:
   schemas:
