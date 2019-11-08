@@ -226,6 +226,7 @@ components:
     Answer:
       title: Answer
       type: object
+      description: ''
       properties:
         id:
           type: integer
@@ -282,9 +283,9 @@ components:
           type: string
         detail:
           type: string
-        picture_url:
+        pictureUrl:
           type: string
-        link_url:
+        linkUrl:
           type: string
         title:
           type: string
