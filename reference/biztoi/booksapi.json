@@ -12,7 +12,7 @@
   "host": "www.googleapis.com",
   "basePath": "/books/v1",
   "schemes": [
-    "http"
+    "https"
   ],
   "produces": [
     "application/json"
