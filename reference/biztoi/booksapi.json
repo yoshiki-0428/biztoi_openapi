@@ -1878,7 +1878,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Volumes"
+            }
           }
         },
         "tags": [
@@ -3473,6 +3476,7 @@
       }
     },
     "Volume": {
+      "type": "object",
       "properties": {
         "accessInfo": {
           "description": "This is a default description.",

@@ -278,7 +278,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
         isbn:
           type: string
         detail:
@@ -289,6 +289,14 @@ components:
           type: string
         title:
           type: string
+        author:
+          type: array
+          items:
+            type: string
+        category:
+          type: array
+          items:
+            type: string
       required:
         - id
         - detail
