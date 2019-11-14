@@ -96,6 +96,27 @@ paths:
           description: リダイレクト対象URL
           required: true
       operationId: AuthLogin
+  '/books/{book_id}':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+    get:
+      summary: GetToi
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: Not Found
+      description: 本に紐づく問一覧を取得する
+      operationId: GetBookId
   '/books/{book_id}/toi':
     parameters:
       - schema:
@@ -230,11 +251,11 @@ components:
       properties:
         id:
           type: integer
-        answer_head_id:
+        answerHeadId:
           type: integer
-        question_id:
+        questionId:
           type: integer
-        picture_url:
+        pictureUrl:
           type: string
         answer:
           type: string
@@ -243,8 +264,8 @@ components:
         modified:
           type: string
       required:
-        - answer_head_id
-        - question_id
+        - answerHeadId
+        - questionId
         - answer
         - inserted
     AnswerHead:
@@ -253,11 +274,11 @@ components:
       properties:
         id:
           type: integer
-        user_id:
+        userId:
           type: string
-        toi_id:
+        toiId:
           type: integer
-        publish_flg:
+        publishFlg:
           type: boolean
         inserted:
           type: string
@@ -269,9 +290,9 @@ components:
             $ref: '#/components/schemas/Answer'
       required:
         - id
-        - user_id
-        - toi_id
-        - publish_flg
+        - userId
+        - toiId
+        - publishFlg
         - inserted
     Book:
       title: Book
@@ -305,9 +326,9 @@ components:
       title: BookFavorite
       type: object
       properties:
-        book_id:
+        bookId:
           type: integer
-        favorite_id:
+        favoriteId:
           type: integer
     Question:
       title: Question
@@ -315,13 +336,13 @@ components:
       properties:
         id:
           type: integer
-        toi_id:
+        toiId:
           type: integer
         title:
           type: string
         detail:
           type: string
-        order_id:
+        orderId:
           type: integer
         required:
           type: boolean
@@ -333,10 +354,10 @@ components:
           type: string
       required:
         - id
-        - toi_id
+        - toiId
         - title
         - detail
-        - order_id
+        - orderId
         - required
         - timing
         - inserted
@@ -346,11 +367,11 @@ components:
       properties:
         id:
           type: integer
-        user_id:
+        userId:
           type: string
-        book_id:
+        bookId:
           type: integer
-        picture_url:
+        pictureUrl:
           type: string
         title:
           type: string
@@ -358,7 +379,7 @@ components:
           type: string
         content:
           type: string
-        publish_flg:
+        publishFlg:
           type: boolean
         inserted:
           type: string
@@ -366,11 +387,11 @@ components:
           type: string
       required:
         - id
-        - user_id
-        - book_id
+        - userId
+        - bookId
         - title
         - detail
-        - publish_flg
+        - publishFlg
         - inserted
     User:
       title: User
@@ -380,22 +401,22 @@ components:
           type: string
         email:
           type: string
-        picture_url:
+        pictureUrl:
           type: string
         name:
           type: string
       required:
         - id
-        - name
         - email
+        - name
     Authorize:
       title: Authorize
       type: object
       properties:
-        access_token:
+        accessToken:
           type: string
       required:
-        - access_token
+        - accessToken
     QuestionAnswer:
       title: QuestionAnswer
       type: object
