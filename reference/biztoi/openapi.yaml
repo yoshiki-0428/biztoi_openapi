@@ -96,27 +96,6 @@ paths:
           description: リダイレクト対象URL
           required: true
       operationId: AuthLogin
-  '/books/{book_id}':
-    parameters:
-      - schema:
-          type: string
-        name: book_id
-        in: path
-        required: true
-    get:
-      summary: GetToi
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Book'
-        '404':
-          description: Not Found
-      description: 本に紐づく問一覧を取得する
-      operationId: GetBookId
   '/books/{book_id}/toi':
     parameters:
       - schema:
@@ -133,10 +112,8 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Toi'
-      description: 本に紐づく問一覧を取得する
+                $ref: '#/components/schemas/Toi'
+      description: 本に紐づく問を取得する
       operationId: GetBookToi
   '/books/{book_id}/toi/{toi_id}/questions':
     parameters:
@@ -251,11 +228,11 @@ components:
       properties:
         id:
           type: integer
-        answerHeadId:
+        answer_head_id:
           type: integer
-        questionId:
+        question_id:
           type: integer
-        pictureUrl:
+        picture_url:
           type: string
         answer:
           type: string
@@ -264,8 +241,8 @@ components:
         modified:
           type: string
       required:
-        - answerHeadId
-        - questionId
+        - answer_head_id
+        - question_id
         - answer
         - inserted
     AnswerHead:
@@ -274,11 +251,11 @@ components:
       properties:
         id:
           type: integer
-        userId:
+        user_id:
           type: string
-        toiId:
+        toi_id:
           type: integer
-        publishFlg:
+        publish_flg:
           type: boolean
         inserted:
           type: string
@@ -290,9 +267,9 @@ components:
             $ref: '#/components/schemas/Answer'
       required:
         - id
-        - userId
-        - toiId
-        - publishFlg
+        - user_id
+        - toi_id
+        - publish_flg
         - inserted
     Book:
       title: Book
@@ -326,9 +303,9 @@ components:
       title: BookFavorite
       type: object
       properties:
-        bookId:
+        book_id:
           type: integer
-        favoriteId:
+        favorite_id:
           type: integer
     Question:
       title: Question
@@ -336,13 +313,13 @@ components:
       properties:
         id:
           type: integer
-        toiId:
+        toi_id:
           type: integer
         title:
           type: string
         detail:
           type: string
-        orderId:
+        order_id:
           type: integer
         required:
           type: boolean
@@ -354,10 +331,10 @@ components:
           type: string
       required:
         - id
-        - toiId
+        - toi_id
         - title
         - detail
-        - orderId
+        - order_id
         - required
         - timing
         - inserted
@@ -367,11 +344,11 @@ components:
       properties:
         id:
           type: integer
-        userId:
+        user_id:
           type: string
-        bookId:
+        book_id:
           type: integer
-        pictureUrl:
+        picture_url:
           type: string
         title:
           type: string
@@ -379,7 +356,7 @@ components:
           type: string
         content:
           type: string
-        publishFlg:
+        publish_flg:
           type: boolean
         inserted:
           type: string
@@ -387,11 +364,11 @@ components:
           type: string
       required:
         - id
-        - userId
-        - bookId
+        - user_id
+        - book_id
         - title
         - detail
-        - publishFlg
+        - publish_flg
         - inserted
     User:
       title: User
@@ -401,22 +378,22 @@ components:
           type: string
         email:
           type: string
-        pictureUrl:
+        picture_url:
           type: string
         name:
           type: string
       required:
         - id
-        - email
         - name
+        - email
     Authorize:
       title: Authorize
       type: object
       properties:
-        accessToken:
+        access_token:
           type: string
       required:
-        - accessToken
+        - access_token
     QuestionAnswer:
       title: QuestionAnswer
       type: object
