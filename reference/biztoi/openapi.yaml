@@ -227,11 +227,11 @@ components:
       description: ''
       properties:
         id:
-          type: integer
+          type: string
         answer_head_id:
-          type: integer
+          type: string
         question_id:
-          type: integer
+          type: string
         picture_url:
           type: string
         answer:
@@ -250,11 +250,11 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
         user_id:
           type: string
         toi_id:
-          type: integer
+          type: string
         publish_flg:
           type: boolean
         inserted:
@@ -304,23 +304,23 @@ components:
       type: object
       properties:
         book_id:
-          type: integer
+          type: string
         favorite_id:
-          type: integer
+          type: string
     Question:
       title: Question
       type: object
       properties:
         id:
-          type: integer
+          type: string
         toi_id:
-          type: integer
+          type: string
         title:
           type: string
         detail:
           type: string
         order_id:
-          type: integer
+          type: string
         required:
           type: boolean
         timing:
@@ -343,11 +343,11 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
         user_id:
           type: string
         book_id:
-          type: integer
+          type: string
         picture_url:
           type: string
         title:
