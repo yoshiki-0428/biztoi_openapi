@@ -249,11 +249,11 @@ components:
       properties:
         id:
           type: string
-        answer_head_id:
+        answerHeadId:
           type: string
-        question_id:
+        questionId:
           type: string
-        picture_url:
+        pictureUrl:
           type: string
         answer:
           type: string
@@ -262,8 +262,8 @@ components:
         modified:
           type: string
       required:
-        - answer_head_id
-        - question_id
+        - answerHeadId
+        - questionId
         - answer
         - inserted
     AnswerHead:
@@ -272,11 +272,11 @@ components:
       properties:
         id:
           type: string
-        user_id:
+        userId:
           type: string
-        toi_id:
+        toiId:
           type: string
-        publish_flg:
+        publishFlg:
           type: boolean
         inserted:
           type: string
@@ -288,9 +288,9 @@ components:
             $ref: '#/components/schemas/Answer'
       required:
         - id
-        - user_id
-        - toi_id
-        - publish_flg
+        - userId
+        - toiId
+        - publishFlg
         - inserted
     Book:
       title: Book
@@ -324,9 +324,9 @@ components:
       title: BookFavorite
       type: object
       properties:
-        book_id:
+        bookId:
           type: string
-        favorite_id:
+        favoriteId:
           type: string
     Question:
       title: Question
@@ -334,13 +334,13 @@ components:
       properties:
         id:
           type: string
-        toi_id:
+        toiId:
           type: string
         title:
           type: string
         detail:
           type: string
-        order_id:
+        orderId:
           type: string
         required:
           type: boolean
@@ -352,10 +352,10 @@ components:
           type: string
       required:
         - id
-        - toi_id
+        - toiId
         - title
         - detail
-        - order_id
+        - orderId
         - required
         - timing
         - inserted
@@ -365,11 +365,11 @@ components:
       properties:
         id:
           type: string
-        user_id:
+        userId:
           type: string
-        book_id:
+        bookId:
           type: string
-        picture_url:
+        pictureUrl:
           type: string
         title:
           type: string
@@ -377,7 +377,7 @@ components:
           type: string
         content:
           type: string
-        publish_flg:
+        publishFlg:
           type: boolean
         inserted:
           type: string
@@ -385,11 +385,11 @@ components:
           type: string
       required:
         - id
-        - user_id
-        - book_id
+        - userId
+        - bookId
         - title
         - detail
-        - publish_flg
+        - publishFlg
         - inserted
     User:
       title: User
@@ -399,22 +399,22 @@ components:
           type: string
         email:
           type: string
-        picture_url:
+        pictureUrl:
           type: string
-        name:
+        nickname:
           type: string
       required:
         - id
-        - name
         - email
+        - nickname
     Authorize:
       title: Authorize
       type: object
       properties:
-        access_token:
+        accessToken:
           type: string
       required:
-        - access_token
+        - accessToken
     QuestionAnswer:
       title: QuestionAnswer
       type: object
