@@ -219,6 +219,27 @@ paths:
       operationId: GetAnswers
       description: 他の回答一覧を取得
       tags: []
+  '/books/{book_id}':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+    get:
+      summary: GetToi
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: Not Found
+      description: 本情報を取得する
+      operationId: GetBookId
 components:
   schemas:
     Answer:
