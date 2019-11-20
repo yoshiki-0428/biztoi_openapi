@@ -403,6 +403,8 @@ components:
           type: string
         nickname:
           type: string
+        country:
+          type: string
       required:
         - id
         - email
