@@ -368,7 +368,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: number
         email:
           type: string
         picture_url:
@@ -377,8 +377,8 @@ components:
           type: string
       required:
         - id
-        - name
         - email
+        - name
     Authorize:
       title: Authorize
       type: object
