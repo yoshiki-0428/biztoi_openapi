@@ -263,7 +263,7 @@ paths:
       tags: []
       parameters: []
 
-  '/books/{book_id}/toi/answers/{answer_id}':
+  '/books/{book_id}/toi/answers/{question_id}':
     parameters:
       - schema:
           type: string
@@ -272,11 +272,11 @@ paths:
         required: true
       - schema:
           type: string
-        name: answer_id
+        name: question_id
         in: path
         required: true
     get:
-      summary: GetAnswer
+      summary: GetAnswerByQuestion
       responses:
         '200':
           description: OK
@@ -285,9 +285,24 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/AnswerHead'
-      description: 回答データの取得（Storeに存在しなかった場合）
+                  $ref: '#/components/schemas/Answer'
+      description: 質問に紐付いた回答データの取得（自ユーザ）
       operationId: GetAnswer
+      tags: []
+      parameters: []
+    post:
+      summary: GetAnswerByQuestion
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Answer'
+      description: 質問に紐付いた回答データの作成（自ユーザ）
+      operationId: PostAnswer
       tags: []
       parameters: []
 
@@ -310,7 +325,6 @@ paths:
           name: code
           required: true
       operationId: UserInfo
-
 
 components:
   schemas:
@@ -344,14 +358,20 @@ components:
         - inserted
         - answerType
         - orderId
+
     AnswerHead:
       title: AnswerHead
       type: object
       properties:
         id:
           type: string
+        toiId:
+          type: string
         userId:
           type: string
+        category:
+          type: string
+          description: 'Health, Amibiton, Relation, Money'
         publishFlg:
           type: boolean
         inserted:
@@ -367,6 +387,7 @@ components:
         - userId
         - publishFlg
         - inserted
+
     Book:
       title: Book
       type: object
@@ -395,14 +416,7 @@ components:
         - id
         - detail
         - title
-    BookFavorite:
-      title: BookFavorite
-      type: object
-      properties:
-        bookId:
-          type: string
-        favoriteId:
-          type: string
+
     Question:
       title: Question
       type: object
@@ -413,8 +427,9 @@ components:
           type: string
         title:
           type: string
-        orderId:
+        nextQuestionId:
           type: string
+          description: '次の質問を参照する項目'
         required:
           type: boolean
         answerType:
@@ -427,6 +442,7 @@ components:
         - orderId
         - required
         - answerType
+
     Toi:
       title: Toi
       type: object
@@ -459,6 +475,7 @@ components:
         - detail
         - publishFlg
         - inserted
+
     User:
       title: User
       type: object
@@ -477,6 +494,7 @@ components:
         - id
         - email
         - nickname
+
     Authorize:
       title: Authorize
       type: object
@@ -485,12 +503,4 @@ components:
           type: string
       required:
         - accessToken
-    QuestionAnswer:
-      title: QuestionAnswer
-      type: object
-      properties:
-        question:
-          $ref: '#/components/schemas/Question'
-        answer:
-          $ref: '#/components/schemas/Answer'
   securitySchemes: {}
