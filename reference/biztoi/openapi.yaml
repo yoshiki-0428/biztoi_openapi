@@ -8,6 +8,46 @@ info:
 servers:
   - url: 'http://localhost:8000/api'
 paths:
+  /auth/token:
+    get:
+      summary: Auth Get Token
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authorize'
+      description: アクセストークン取得
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: code
+          description: AWS Cognitoより返却される認証コード
+          required: true
+      operationId: AuthGetToken
+
+  /auth/login:
+    get:
+      summary: Auth Login
+      tags: []
+      responses:
+        '200':
+          description: ''
+        '303':
+          description: See Other
+      description: ログイン画面に遷移する
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: redirect_uri
+          description: リダイレクト対象URL
+          required: true
+      operationId: AuthLogin
+
   /books:
     get:
       summary: Book List
@@ -39,186 +79,7 @@ paths:
             schema:
               $ref: '#/components/schemas/Book'
       tags: []
-  /users/me:
-    get:
-      summary: User info
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-      description: ユーザ情報
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: code
-          required: true
-      operationId: UserInfo
-  /auth/token:
-    get:
-      summary: Auth Get Token
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Authorize'
-      description: アクセストークン取得
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: code
-          description: AWS Cognitoより返却される認証コード
-          required: true
-      operationId: AuthGetToken
-  /auth/login:
-    get:
-      summary: Auth Login
-      tags: []
-      responses:
-        '200':
-          description: ''
-        '303':
-          description: See Other
-      description: ログイン画面に遷移する
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: redirect_uri
-          description: リダイレクト対象URL
-          required: true
-      operationId: AuthLogin
-  '/books/{book_id}/toi':
-    parameters:
-      - schema:
-          type: string
-        name: book_id
-        in: path
-        required: true
-    get:
-      summary: GetToi
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Toi'
-      description: 本に紐づく問を取得する
-      operationId: GetBookToi
-  '/books/{book_id}/toi/{toi_id}/questions':
-    parameters:
-      - schema:
-          type: string
-        name: book_id
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: toi_id
-        in: path
-        required: true
-    get:
-      summary: GetBookQuestion
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/QuestionAnswer'
-      description: 本に紐づく質問一覧を取得する
-      operationId: GetBookQuestion
-  '/books/{book_id}/toi/{toi_id}/answers/{question_id}':
-    parameters:
-      - schema:
-          type: string
-        name: book_id
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: toi_id
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: question_id
-        in: path
-        required: true
-    post:
-      summary: PostAnswer
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Answer'
-      description: 回答ヘッダー情報の作成（回答し始めた際に作成される）
-      operationId: PostAnswer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Answer'
-      tags: []
-      parameters: []
-  '/books/{book_id}/toi/{toi_id}/answers':
-    parameters:
-      - schema:
-          type: string
-        name: book_id
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: toi_id
-        in: path
-        required: true
-    post:
-      summary: PostAnswerHead
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AnswerHead'
-      description: Answerを保存する
-      operationId: PostAnswerHead
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AnswerHead'
-      tags: []
-    get:
-      summary: GetAnswers
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AnswerHead'
-      operationId: GetAnswers
-      description: 他の回答一覧を取得
-      tags: []
+
   '/books/{book_id}':
     parameters:
       - schema:
@@ -240,6 +101,217 @@ paths:
           description: Not Found
       description: 本情報を取得する
       operationId: GetBookId
+
+  '/books/{book_id}/toi':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+    get:
+      summary: GetToi
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Toi'
+      description: 本に紐づく問を取得する
+      operationId: GetBookToi
+    post:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+      operationId: PostToi
+      description: Toi情報を作成する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Toi'
+      tags: []
+
+  '/books/{book_id}/toi/questions':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+    get:
+      summary: GetBookQuestion
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Question'
+      description: 本に紐づく質問一覧を取得する
+      operationId: GetBookQuestions
+    post:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+      operationId: PostQuestion
+      description: 質問情報を作成する
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Question'
+      tags: []
+
+  '/books/{book_id}/toi/questions/{question_id}':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: question_id
+        in: path
+        required: true
+    get:
+      summary: GetBookQuestion
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Question'
+      description: 本に紐づく質問を取得する（Storeに存在しなかった場合）
+      operationId: GetBookQuestion
+
+  '/books/{book_id}/toi/answers':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+    get:
+      summary: GetAnswers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnswerHead'
+      description: 回答ヘッダー+回答データの取得
+      operationId: GetAnswers
+      tags: []
+      parameters: []
+
+  '/books/{book_id}/toi/answers/me':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+    get:
+      summary: GetAnswersMe
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnswerHead'
+      description: 回答ヘッダー+回答データの取得(自ユーザ)
+      operationId: GetAnswersMe
+      tags: []
+      parameters: []
+    post:
+      summary: GetAnswersMe
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnswerHead'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnswerHead'
+      description: 回答ヘッダー+回答データの作成(自ユーザ)
+      operationId: PostAnswersMe
+      tags: []
+      parameters: []
+
+  '/books/{book_id}/toi/answers/{answer_id}':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: answer_id
+        in: path
+        required: true
+    get:
+      summary: GetAnswer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnswerHead'
+      description: 回答データの取得（Storeに存在しなかった場合）
+      operationId: GetAnswer
+      tags: []
+      parameters: []
+
+  /users/me:
+    get:
+      summary: User info
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      description: ユーザ情報
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: code
+          required: true
+      operationId: UserInfo
+
+
 components:
   schemas:
     Answer:
@@ -253,19 +325,25 @@ components:
           type: string
         questionId:
           type: string
-        pictureUrl:
-          type: string
         answer:
           type: string
         inserted:
           type: string
         modified:
           type: string
+        answerType:
+          type: string
+          description: 'OBJECTIVE, GIST, ACTION_PLAN'
+        orderId:
+          type: string
+          description: 順番を保持する項目
       required:
         - answerHeadId
         - questionId
         - answer
         - inserted
+        - answerType
+        - orderId
     AnswerHead:
       title: AnswerHead
       type: object
@@ -273,8 +351,6 @@ components:
         id:
           type: string
         userId:
-          type: string
-        toiId:
           type: string
         publishFlg:
           type: boolean
@@ -289,7 +365,6 @@ components:
       required:
         - id
         - userId
-        - toiId
         - publishFlg
         - inserted
     Book:
@@ -338,27 +413,20 @@ components:
           type: string
         title:
           type: string
-        detail:
-          type: string
         orderId:
           type: string
         required:
           type: boolean
-        timing:
+        answerType:
           type: string
-        inserted:
-          type: string
-        modified:
-          type: string
+          description: 'OBJECTIVE, GIST, ACTION_PLAN'
       required:
         - id
         - toiId
         - title
-        - detail
         - orderId
         - required
-        - timing
-        - inserted
+        - answerType
     Toi:
       title: Toi
       type: object
