@@ -11,7 +11,7 @@ paths:
   /books:
     get:
       summary: Book List
-      tags: []
+      tags: ['biztoi']
       responses:
         '200':
           description: OK
@@ -38,7 +38,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Book'
-      tags: []
+      tags: ['biztoi']
   '/books/{book_id}':
     parameters:
       - schema:
@@ -48,7 +48,7 @@ paths:
         required: true
     get:
       summary: GetToi
-      tags: []
+      tags: ['biztoi']
       responses:
         '200':
           description: OK
@@ -69,7 +69,7 @@ paths:
         required: true
     get:
       summary: GetToi
-      tags: []
+      tags: ['biztoi']
       responses:
         '200':
           description: OK
@@ -95,7 +95,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Toi'
-      tags: []
+      tags: ['biztoi']
   '/books/{book_id}/toi/questions':
     parameters:
       - schema:
@@ -105,7 +105,7 @@ paths:
         required: true
     get:
       summary: GetBookQuestion
-      tags: []
+      tags: ['biztoi']
       responses:
         '200':
           description: OK
@@ -129,7 +129,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Question'
-      tags: []
+      tags: ['biztoi']
   '/books/{book_id}/toi/questions/{question_id}':
     parameters:
       - schema:
@@ -144,7 +144,7 @@ paths:
         required: true
     get:
       summary: GetBookQuestion
-      tags: []
+      tags: ['biztoi']
       responses:
         '200':
           description: OK
@@ -174,7 +174,7 @@ paths:
                   $ref: '#/components/schemas/AnswerHead'
       description: 回答ヘッダー+回答データの取得
       operationId: GetAnswers
-      tags: []
+      tags: ['biztoi']
       parameters: []
   '/books/{book_id}/toi/answers/me':
     parameters:
@@ -196,7 +196,7 @@ paths:
                   $ref: '#/components/schemas/AnswerHead'
       description: 回答ヘッダー+回答データの取得(自ユーザ)
       operationId: GetAnswersMe
-      tags: []
+      tags: ['biztoi']
       parameters: []
     post:
       summary: GetAnswersMe
@@ -216,7 +216,7 @@ paths:
                   $ref: '#/components/schemas/AnswerHead'
       description: 回答ヘッダー+回答データの作成(自ユーザ)
       operationId: PostAnswersMe
-      tags: []
+      tags: ['biztoi']
       parameters: []
   '/books/{book_id}/toi/answers/me/{question_id}':
     parameters:
@@ -243,7 +243,7 @@ paths:
                   $ref: '#/components/schemas/Answer'
       description: 質問に紐付いた回答データの取得（自ユーザ）
       operationId: GetAnswer
-      tags: []
+      tags: ['biztoi']
       parameters: []
     post:
       summary: PostAnswerByQuestion
@@ -258,7 +258,7 @@ paths:
                   $ref: '#/components/schemas/Answer'
       description: 質問に紐付いた回答データの作成（自ユーザ）
       operationId: PostAnswer
-      tags: []
+      tags: ['biztoi']
       parameters: []
       requestBody:
         content:
@@ -268,7 +268,7 @@ paths:
   /users/me:
     get:
       summary: User info
-      tags: []
+      tags: ['biztoi']
       responses:
         '200':
           description: OK
@@ -287,7 +287,7 @@ paths:
   /auth/login:
     get:
       summary: Auth Login
-      tags: []
+      tags: ['biztoi']
       responses:
         '200':
           description: ''
@@ -305,7 +305,7 @@ paths:
   /auth/token:
     get:
       summary: Auth Get Token
-      tags: []
+      tags: ['biztoi']
       responses:
         '200':
           description: OK
@@ -325,7 +325,7 @@ paths:
   /favorite/books:
     post:
       summary: FavoriteBooks
-      tags: []
+      tags: ['biztoi']
       responses:
         '200':
           description: OK
@@ -339,7 +339,7 @@ paths:
               $ref: '#/components/schemas/Book'
     delete:
       summary: DeleteFavoriteBooks
-      tags: []
+      tags: ['biztoi']
       responses:
         '200':
           description: OK
@@ -354,7 +354,7 @@ paths:
   /likes/answers:
     post:
       summary: LikesAnswers
-      tags: []
+      tags: ['biztoi']
       responses:
         '200':
           description: OK
@@ -368,7 +368,7 @@ paths:
               $ref: '#/components/schemas/AnswerHead'
     delete:
       summary: DeleteLikesAnswers
-      tags: []
+      tags: ['biztoi']
       responses:
         '200':
           description: OK
