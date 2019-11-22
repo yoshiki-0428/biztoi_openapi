@@ -246,7 +246,7 @@ paths:
       tags: []
       parameters: []
     post:
-      summary: GetAnswerByQuestion
+      summary: PostAnswerByQuestion
       responses:
         '200':
           description: OK
@@ -260,6 +260,11 @@ paths:
       operationId: PostAnswer
       tags: []
       parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnswerList'
   /users/me:
     get:
       summary: User info
@@ -270,7 +275,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/BizToiUser'
       description: ユーザ情報
       parameters:
         - schema:
@@ -407,16 +412,6 @@ components:
         - inserted
         - answerType
         - orderId
-    AnswerList:
-      title: AnswerList
-      type: object
-      properties:
-        answers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Answer'
-      required:
-        - answers
     AnswerHead:
       title: AnswerHead
       type: object
@@ -526,8 +521,8 @@ components:
         - detail
         - publishFlg
         - inserted
-    User:
-      title: User
+    BizToiUser:
+      title: BizToiUser
       type: object
       properties:
         id:
@@ -552,4 +547,14 @@ components:
           type: string
       required:
         - accessToken
+    AnswerList:
+      title: AnswerList
+      type: object
+      properties:
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Answer'
+      required:
+        - answers
   securitySchemes: {}
