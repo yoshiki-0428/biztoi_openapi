@@ -8,46 +8,6 @@ info:
 servers:
   - url: 'http://localhost:8000/api'
 paths:
-  /auth/token:
-    get:
-      summary: Auth Get Token
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Authorize'
-      description: アクセストークン取得
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: code
-          description: AWS Cognitoより返却される認証コード
-          required: true
-      operationId: AuthGetToken
-
-  /auth/login:
-    get:
-      summary: Auth Login
-      tags: []
-      responses:
-        '200':
-          description: ''
-        '303':
-          description: See Other
-      description: ログイン画面に遷移する
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: redirect_uri
-          description: リダイレクト対象URL
-          required: true
-      operationId: AuthLogin
-
   /books:
     get:
       summary: Book List
@@ -79,7 +39,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Book'
       tags: []
-
   '/books/{book_id}':
     parameters:
       - schema:
@@ -101,7 +60,6 @@ paths:
           description: Not Found
       description: 本情報を取得する
       operationId: GetBookId
-
   '/books/{book_id}/toi':
     parameters:
       - schema:
@@ -134,7 +92,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Toi'
       tags: []
-
   '/books/{book_id}/toi/questions':
     parameters:
       - schema:
@@ -169,7 +126,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Question'
       tags: []
-
   '/books/{book_id}/toi/questions/{question_id}':
     parameters:
       - schema:
@@ -196,7 +152,6 @@ paths:
                   $ref: '#/components/schemas/Question'
       description: 本に紐づく質問を取得する（Storeに存在しなかった場合）
       operationId: GetBookQuestion
-
   '/books/{book_id}/toi/answers':
     parameters:
       - schema:
@@ -219,7 +174,6 @@ paths:
       operationId: GetAnswers
       tags: []
       parameters: []
-
   '/books/{book_id}/toi/answers/me':
     parameters:
       - schema:
@@ -262,7 +216,6 @@ paths:
       operationId: PostAnswersMe
       tags: []
       parameters: []
-
   '/books/{book_id}/toi/answers/{question_id}':
     parameters:
       - schema:
@@ -305,7 +258,6 @@ paths:
       operationId: PostAnswer
       tags: []
       parameters: []
-
   /users/me:
     get:
       summary: User info
@@ -325,7 +277,102 @@ paths:
           name: code
           required: true
       operationId: UserInfo
-
+  /auth/login:
+    get:
+      summary: Auth Login
+      tags: []
+      responses:
+        '200':
+          description: ''
+        '303':
+          description: See Other
+      description: ログイン画面に遷移する
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: redirect_uri
+          description: リダイレクト対象URL
+          required: true
+      operationId: AuthLogin
+  /auth/token:
+    get:
+      summary: Auth Get Token
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authorize'
+      description: アクセストークン取得
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: code
+          description: AWS Cognitoより返却される認証コード
+          required: true
+      operationId: AuthGetToken
+  /favorite/books:
+    post:
+      summary: FavoriteBooks
+      tags: []
+      responses:
+        '200':
+          description: OK
+      description: 本をお気に入りする
+      parameters: []
+      operationId: FavoriteBooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+    delete:
+      summary: DeleteFavoriteBooks
+      tags: []
+      responses:
+        '200':
+          description: OK
+      description: 本をお気に入り削除する
+      parameters: []
+      operationId: DeleteFavoriteBooks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+  /likes/answers:
+    post:
+      summary: LikesAnswers
+      tags: []
+      responses:
+        '200':
+          description: OK
+      description: 回答をいいねする
+      parameters: []
+      operationId: LikesAnswers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnswerHead'
+    delete:
+      summary: DeleteLikesAnswers
+      tags: []
+      responses:
+        '200':
+          description: OK
+      description: 回答をいいね削除する
+      parameters: []
+      operationId: DeleteLikesAnswers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnswerHead'
 components:
   schemas:
     Answer:
@@ -358,20 +405,14 @@ components:
         - inserted
         - answerType
         - orderId
-
     AnswerHead:
       title: AnswerHead
       type: object
       properties:
         id:
           type: string
-        toiId:
-          type: string
         userId:
           type: string
-        category:
-          type: string
-          description: 'Health, Amibiton, Relation, Money'
         publishFlg:
           type: boolean
         inserted:
@@ -382,12 +423,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Answer'
+        toiId:
+          type: string
+        category:
+          type: string
+          description: 'Health, Amibiton, Relation, Money'
       required:
         - id
         - userId
         - publishFlg
         - inserted
-
     Book:
       title: Book
       type: object
@@ -416,7 +461,6 @@ components:
         - id
         - detail
         - title
-
     Question:
       title: Question
       type: object
@@ -429,7 +473,7 @@ components:
           type: string
         nextQuestionId:
           type: string
-          description: '次の質問を参照する項目'
+          description: 次の質問を参照する項目
         required:
           type: boolean
         answerType:
@@ -442,7 +486,6 @@ components:
         - orderId
         - required
         - answerType
-
     Toi:
       title: Toi
       type: object
@@ -475,7 +518,6 @@ components:
         - detail
         - publishFlg
         - inserted
-
     User:
       title: User
       type: object
@@ -494,7 +536,6 @@ components:
         - id
         - email
         - nickname
-
     Authorize:
       title: Authorize
       type: object
