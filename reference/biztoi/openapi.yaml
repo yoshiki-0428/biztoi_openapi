@@ -496,13 +496,9 @@ components:
           type: string
         bookId:
           type: string
-        pictureUrl:
-          type: string
         title:
           type: string
         detail:
-          type: string
-        content:
           type: string
         publishFlg:
           type: boolean
