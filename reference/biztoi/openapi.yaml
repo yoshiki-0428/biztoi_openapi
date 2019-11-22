@@ -407,6 +407,16 @@ components:
         - inserted
         - answerType
         - orderId
+    AnswerList:
+      title: AnswerList
+      type: object
+      properties:
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Answer'
+      required:
+        - answers
     AnswerHead:
       title: AnswerHead
       type: object
