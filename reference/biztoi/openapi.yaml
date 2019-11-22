@@ -84,6 +84,10 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Toi'
       operationId: PostToi
       description: Toi情報を作成する
       requestBody:
@@ -147,9 +151,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Question'
+                $ref: '#/components/schemas/Question'
       description: 本に紐づく質問を取得する（Storeに存在しなかった場合）
       operationId: GetBookQuestion
   '/books/{book_id}/toi/answers':
@@ -216,7 +218,7 @@ paths:
       operationId: PostAnswersMe
       tags: []
       parameters: []
-  '/books/{book_id}/toi/answers/{question_id}':
+  '/books/{book_id}/toi/answers/me/{question_id}':
     parameters:
       - schema:
           type: string
