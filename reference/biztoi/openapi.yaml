@@ -496,14 +496,17 @@ components:
           type: string
         title:
           type: string
-        nextQuestionId:
-          type: string
-          description: 次の質問を参照する項目
-        required:
-          type: boolean
         answerType:
           type: string
           description: 'OBJECTIVE, GIST, ACTION_PLAN'
+        required:
+          type: boolean
+        orderId:
+          type: number
+          description: '順番を保証した項目'
+        nextQuestionId:
+          type: string
+          description: 次の質問を参照する項目
       required:
         - id
         - toiId
