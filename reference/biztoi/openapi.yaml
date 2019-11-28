@@ -251,7 +251,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Answer'
       description: 質問に紐付いた回答データの取得（自ユーザ）
-      operationId: GetAnswer
+      operationId: GetAnswerByQuestion
       tags:
         - biztoi
       parameters: []
