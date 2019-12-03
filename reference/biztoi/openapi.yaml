@@ -496,6 +496,8 @@ components:
           type: string
         title:
           type: string
+        step:
+          type: number
         answerType:
           type: string
           description: 'OBJECTIVE, GIST, ACTION_PLAN'
@@ -511,6 +513,7 @@ components:
         - id
         - toiId
         - title
+        - step
         - orderId
         - required
         - answerType
