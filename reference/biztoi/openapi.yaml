@@ -207,7 +207,7 @@ paths:
         - biztoi
       parameters: []
     post:
-      summary: GetAnswersMe
+      summary: PostAnswerHead
       requestBody:
         content:
           application/json:
@@ -219,11 +219,12 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AnswerHead'
-      description: 回答ヘッダー+回答データの作成(自ユーザ)
-      operationId: PostAnswersMe
+                type: object
+                properties:
+                  '':
+                    $ref: '#/components/schemas/AnswerHead'
+      description: 回答ヘッダー作成(自ユーザ)
+      operationId: PostAnswerHead
       tags:
         - biztoi
       parameters: []
@@ -505,7 +506,7 @@ components:
           type: boolean
         orderId:
           type: number
-          description: '順番を保証した項目'
+          description: 順番を保証した項目
         nextQuestionId:
           type: string
           description: 次の質問を参照する項目
