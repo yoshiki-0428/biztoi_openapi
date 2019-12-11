@@ -213,21 +213,18 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AnswerHead'
+      description: 回答ヘッダー作成(自ユーザ)
+      operationId: PostAnswerHead
+      tags:
+        - biztoi
+      parameters: []
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  '':
-                    $ref: '#/components/schemas/AnswerHead'
-      description: 回答ヘッダー作成(自ユーザ)
-      operationId: PostAnswerHead
-      tags:
-        - biztoi
-      parameters: []
+                $ref: '#/components/schemas/AnswerHead'
   '/books/{book_id}/toi/answers/me/{question_id}':
     parameters:
       - schema:
