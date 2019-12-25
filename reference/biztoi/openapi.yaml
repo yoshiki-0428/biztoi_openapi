@@ -396,6 +396,32 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AnswerHead'
+  '/books/{book_id}/toi/answers/{answer_id}':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: answer_id
+        in: path
+        required: true
+    get:
+      summary: GetAnswer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswerHead'
+      description: 回答ヘッダー+回答データの取得(Single)
+      operationId: GetAnswer
+      tags:
+        - biztoi
+      parameters: []
 components:
   schemas:
     Answer:
