@@ -486,6 +486,7 @@ components:
         - userId
         - publishFlg
         - inserted
+        - likeInfo
     Book:
       title: Book
       type: object
