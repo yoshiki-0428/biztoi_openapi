@@ -516,6 +516,7 @@ components:
         - id
         - detail
         - title
+        - isFavorite
     Question:
       title: Question
       type: object
@@ -619,4 +620,7 @@ components:
           type: boolean
         sum:
           type: number
+      required:
+        - isActive
+        - sum
   securitySchemes: {}
