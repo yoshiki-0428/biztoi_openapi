@@ -479,6 +479,8 @@ components:
           description: 'Health, Amibiton, Relation, Money'
         userInfo:
           $ref: '#/components/schemas/BizToiUser'
+        likeInfo:
+          $ref: '#/components/schemas/AnswerLikes'
       required:
         - id
         - userId
@@ -508,6 +510,8 @@ components:
           type: array
           items:
             type: string
+        isFavorite:
+          type: boolean
       required:
         - id
         - detail
@@ -607,4 +611,12 @@ components:
             $ref: '#/components/schemas/Answer'
       required:
         - answers
+    AnswerLikes:
+      title: AnswerLikes
+      type: object
+      properties:
+        isActive:
+          type: boolean
+        sum:
+          type: number
   securitySchemes: {}
