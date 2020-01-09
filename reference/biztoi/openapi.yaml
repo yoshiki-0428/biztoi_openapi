@@ -477,6 +477,8 @@ components:
         category:
           type: string
           description: 'Health, Amibiton, Relation, Money'
+        userInfo:
+          $ref: '#/components/schemas/BizToiUser'
       required:
         - id
         - userId
