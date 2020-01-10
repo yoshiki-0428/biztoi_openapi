@@ -511,13 +511,13 @@ components:
           type: array
           items:
             type: string
-        isFavorite:
+        favorite:
           type: boolean
       required:
         - id
         - detail
         - title
-        - isFavorite
+        - favorite
     Question:
       title: Question
       type: object
@@ -617,11 +617,11 @@ components:
       title: AnswerLikes
       type: object
       properties:
-        isActive:
+        active:
           type: boolean
         sum:
           type: number
       required:
-        - isActive
+        - active
         - sum
   securitySchemes: {}
