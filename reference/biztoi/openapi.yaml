@@ -349,7 +349,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Book'
+              $ref: '#/components/schemas/SendLikeInfo'
     delete:
       summary: DeleteFavoriteBooks
       tags:
@@ -364,7 +364,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Book'
+              $ref: '#/components/schemas/SendLikeInfo'
   /likes/answers:
     post:
       summary: LikesAnswers
@@ -380,7 +380,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AnswerHead'
+              $ref: '#/components/schemas/SendLikeInfo'
     delete:
       summary: DeleteLikesAnswers
       tags:
@@ -395,7 +395,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AnswerHead'
+              $ref: '#/components/schemas/SendLikeInfo'
   '/books/{book_id}/toi/answers/{answer_id}':
     parameters:
       - schema:
@@ -624,4 +624,12 @@ components:
       required:
         - active
         - sum
+    SendLikeInfo:
+      title: SendLikeInfo
+      type: object
+      properties:
+        id:
+          type: string
+        active:
+          type: boolean
   securitySchemes: {}
