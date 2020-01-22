@@ -541,14 +541,17 @@ components:
         nextQuestionId:
           type: string
           description: 次の質問を参照する項目
+        example:
+          type: string
+          description: 例文
       required:
         - id
         - toiId
         - title
         - step
-        - orderId
-        - required
         - answerType
+        - required
+        - orderId
     Toi:
       title: Toi
       type: object
