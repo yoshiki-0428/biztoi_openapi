@@ -2055,8 +2055,3 @@ x-apih-sdks:
   url: https://www.npmjs.com/package/paperbackswap
   repoUrl: https://github.com/pijewski/node
   language: JavaScript
-x-apih-organization: public
-meta:
-  revision: 0
-  created: 1579554542008
-  version: 0
