@@ -193,6 +193,80 @@ paths:
     - "$ref": "#/parameters/quotaUser"
     - "$ref": "#/parameters/userIp"
 
+  "/volumes/{volumeId}":
+    get:
+      summary: Get Volume
+      description: Gets volume information for a single volume.
+      operationId: books.volumes.get
+      parameters:
+      - in: query
+        name: country
+        description: ISO-3166-1 code to override the IP-based location.
+        type: string
+        format: string
+      - in: path
+        name: volumeId
+        description: ID of volume to retrieve.
+        type: string
+        format: string
+        required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/Volume"
+      tags:
+      - volumes
+      security: 
+      - Oauth2:
+        - https://www.googleapis.com/auth/books
+
+  "/volumes/{volumeId}/associated":
+    get:
+      summary: Get Associated Volumes
+      description: Return a list of associated books.
+      operationId: books.volumes.associated.list
+      parameters:
+      - in: query
+        name: association
+        description: Association type.
+        type: string
+        format: string
+      - in: query
+        name: locale
+        description: 'ISO-639-1 language and ISO-3166-1 country code. Ex: en_US. Used
+          for generating recommendations.'
+        type: string
+        format: string
+      - in: query
+        name: maxAllowedMaturityRating
+        description: The maximum allowed maturity rating of returned recommendations.
+          Books with a higher maturity rating are filtered out.
+        type: string
+        format: string
+      - in: path
+        name: volumeId
+        description: ID of the source volume.
+        type: string
+        format: string
+      responses:
+        '200':
+          description: OK
+      tags:
+      - volumes
+      security: 
+    parameters:
+      summary: Get Associated Volumes
+      description: ''
+      operationId: ''
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            "$ref": "#/definitions/Volumes"
+      tags:
+      - volumes
+      security: 
 
 definitions:
   Annotation:
