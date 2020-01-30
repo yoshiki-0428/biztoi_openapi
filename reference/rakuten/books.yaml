@@ -8,8 +8,6 @@ info:
   termsOfService: 'https://webservice.rakuten.co.jp/api/bookstotalsearch/'
 servers:
   - url: 'https://app.rakuten.co.jp/services/api'
-tags:
-  - name: RakutenBooksTotal
 paths:
   /BooksTotal/Search/20170404:
     get:
@@ -23,8 +21,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/SearchInfo'
       description: 楽天本検索APIエンドポイント
-      tags:
-        - RakutenBooksTotal
       parameters:
         - schema:
             type: string
@@ -92,6 +88,8 @@ paths:
             type: string
           in: query
           name: NGKeyword
+      tags:
+        - RakutenBooksTotal
 components:
   schemas:
     SearchInfo:
@@ -116,57 +114,65 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ItemMap'
+        GenreInformation:
+          type: object
     Item:
       title: Item
       type: object
       properties:
-        title:
-          type: string
-        author:
-          type: string
-        artistName:
-          type: string
-        publisherName:
-          type: string
-        label:
-          type: string
-        isbn:
-          type: string
-        jan:
-          type: string
-        hardware:
-          type: string
-        os:
-          type: string
-        itemCaption:
-          type: string
-        salesDate:
-          type: string
-        itemPrice:
-          type: string
-        listPrice:
-          type: string
-        itemUrl:
-          type: string
-        affiliateUrl:
-          type: string
-        smallImageUrl:
-          type: string
-        mediumImageUrl:
-          type: string
-        largeImageUrl:
-          type: string
-        availability:
-          type: string
-        postageFlag:
-          type: string
-        limitedFlag:
-          type: string
-        reviewCount:
+        booksGenreId:
           type: string
         reviewAverage:
           type: string
-        booksGenreId:
+        reviewCount:
+          type: string
+        limitedFlag:
+          type: string
+        postageFlag:
+          type: string
+        availability:
+          type: string
+        largeImageUrl:
+          type: string
+        mediumImageUrl:
+          type: string
+        smallImageUrl:
+          type: string
+        affiliateUrl:
+          type: string
+        itemUrl:
+          type: string
+        listPrice:
+          type: string
+        itemPrice:
+          type: string
+        salesDate:
+          type: string
+        itemCaption:
+          type: string
+        os:
+          type: string
+        hardware:
+          type: string
+        jan:
+          type: string
+        isbn:
+          type: string
+        label:
+          type: string
+        publisherName:
+          type: string
+        artistName:
+          type: string
+        author:
+          type: string
+        title:
+          type: string
+        discountRate:
+          type: string
+        discountPrice:
+          type: string
+        chirayomiUrl:
           type: string
     ItemMap:
       title: ItemMap
@@ -174,3 +180,5 @@ components:
       properties:
         item:
           $ref: '#/components/schemas/Item'
+tags:
+  - name: RakutenBooksTotal
