@@ -9,8 +9,7 @@ info:
 servers:
   - url: 'https://app.rakuten.co.jp/services/api'
 tags:
-- name: RakutenBooksTotal
-
+  - name: RakutenBooksTotal
 paths:
   /BooksTotal/Search/20170404:
     get:
@@ -24,7 +23,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SearchInfo'
       description: 楽天本検索APIエンドポイント
-      tags: 
+      tags:
         - RakutenBooksTotal
       parameters:
         - schema:
@@ -97,6 +96,7 @@ components:
   schemas:
     SearchInfo:
       type: object
+      title: ''
       properties:
         count:
           type: string
@@ -114,9 +114,8 @@ components:
           type: string
         Items:
           type: array
-          Items:
-            $ref: '#/components/schemas/Item'
-      title: ''
+          items:
+            $ref: '#/components/schemas/ItemMap'
     Item:
       title: Item
       type: object
@@ -169,3 +168,9 @@ components:
           type: string
         booksGenreId:
           type: string
+    ItemMap:
+      title: ItemMap
+      type: object
+      properties:
+        item:
+          $ref: '#/components/schemas/Item'
