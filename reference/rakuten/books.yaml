@@ -116,6 +116,7 @@ components:
             $ref: '#/components/schemas/ItemMap'
         GenreInformation:
           type: object
+      description: ''
     Item:
       title: Item
       type: object
@@ -178,7 +179,7 @@ components:
       title: ItemMap
       type: object
       properties:
-        item:
+        Item:
           $ref: '#/components/schemas/Item'
 tags:
   - name: RakutenBooksTotal
