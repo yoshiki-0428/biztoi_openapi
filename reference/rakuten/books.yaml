@@ -112,9 +112,9 @@ components:
           type: string
         pageCount:
           type: string
-        items:
+        Items:
           type: array
-          items:
+          Items:
             $ref: '#/components/schemas/Item'
       title: ''
     Item:
