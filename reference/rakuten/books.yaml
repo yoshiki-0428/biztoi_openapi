@@ -8,6 +8,9 @@ info:
   termsOfService: 'https://webservice.rakuten.co.jp/api/bookstotalsearch/'
 servers:
   - url: 'https://app.rakuten.co.jp/services/api'
+tags:
+- name: RakutenBooksTotal
+
 paths:
   /BooksTotal/Search/20170404:
     get:
@@ -19,26 +22,10 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  count:
-                    type: string
-                  page:
-                    type: string
-                  first:
-                    type: string
-                  last:
-                    type: string
-                  hits:
-                    type: string
-                  carrier:
-                    type: string
-                  pageCount:
-                    type: string
-                  items:
-                    type: array
-                    items: {}
+                $ref: '#/components/schemas/SearchInfo'
       description: 楽天本検索APIエンドポイント
+      tags: 
+        - RakutenBooksTotal
       parameters:
         - schema:
             type: string
@@ -106,3 +93,79 @@ paths:
             type: string
           in: query
           name: NGKeyword
+components:
+  schemas:
+    SearchInfo:
+      type: object
+      properties:
+        count:
+          type: string
+        page:
+          type: string
+        first:
+          type: string
+        last:
+          type: string
+        hits:
+          type: string
+        carrier:
+          type: string
+        pageCount:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+      title: ''
+    Item:
+      title: Item
+      type: object
+      properties:
+        title:
+          type: string
+        author:
+          type: string
+        artistName:
+          type: string
+        publisherName:
+          type: string
+        label:
+          type: string
+        isbn:
+          type: string
+        jan:
+          type: string
+        hardware:
+          type: string
+        os:
+          type: string
+        itemCaption:
+          type: string
+        salesDate:
+          type: string
+        itemPrice:
+          type: string
+        listPrice:
+          type: string
+        itemUrl:
+          type: string
+        affiliateUrl:
+          type: string
+        smallImageUrl:
+          type: string
+        mediumImageUrl:
+          type: string
+        largeImageUrl:
+          type: string
+        availability:
+          type: string
+        postageFlag:
+          type: string
+        limitedFlag:
+          type: string
+        reviewCount:
+          type: string
+        reviewAverage:
+          type: string
+        booksGenreId:
+          type: string
