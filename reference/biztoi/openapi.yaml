@@ -287,12 +287,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/BizToiUser'
       description: ユーザ情報
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: code
-          required: true
+      parameters: []
       operationId: UserInfo
   /auth/login:
     get:
