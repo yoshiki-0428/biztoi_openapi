@@ -304,7 +304,7 @@ paths:
           description: ''
         '303':
           description: See Other
-      description: ログイン画面に遷移する
+      description: ログイン画面に遷移
       parameters:
         - schema:
             type: string
