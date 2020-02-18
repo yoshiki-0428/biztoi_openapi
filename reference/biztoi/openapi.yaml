@@ -486,9 +486,9 @@ components:
       title: Book
       type: object
       properties:
-        id:
-          type: string
         isbn:
+          type: string
+        title:
           type: string
         detail:
           type: string
@@ -496,20 +496,18 @@ components:
           type: string
         linkUrl:
           type: string
-        title:
-          type: string
-        author:
+        authors:
           type: array
           items:
             type: string
-        category:
+        categories:
           type: array
           items:
             type: string
         favorite:
           type: boolean
       required:
-        - id
+        - isbn
         - detail
         - title
         - favorite
@@ -519,10 +517,18 @@ components:
       properties:
         id:
           type: string
-        toiId:
-          type: string
+        patternId:
+          type: number
+        orderId:
+          type: number
+          description: 順番を保証した項目        
         title:
           type: string
+        detail:
+          type: string
+        example:
+          type: string
+          description: 例文
         step:
           type: number
         answerType:
@@ -530,51 +536,31 @@ components:
           description: 'OBJECTIVE, GIST, ACTION_PLAN'
         required:
           type: boolean
-        orderId:
-          type: number
-          description: 順番を保証した項目
         nextQuestionId:
           type: string
           description: 次の質問を参照する項目
-        example:
-          type: string
-          description: 例文
       required:
         - id
-        - toiId
+        - patternId
+        - orderId
         - title
         - step
         - answerType
         - required
-        - orderId
     Toi:
       title: Toi
       type: object
       properties:
-        id:
-          type: string
-        userId:
-          type: string
-        bookId:
-          type: string
         title:
           type: string
         detail:
           type: string
         publishFlg:
           type: boolean
-        inserted:
-          type: string
-        modified:
-          type: string
       required:
-        - id
-        - userId
-        - bookId
         - title
         - detail
         - publishFlg
-        - inserted
     BizToiUser:
       title: BizToiUser
       type: object
