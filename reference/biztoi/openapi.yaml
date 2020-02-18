@@ -426,6 +426,9 @@ components:
       properties:
         id:
           type: string
+        orderId:
+          type: string
+          description: 順番を保持する項目
         answerHeadId:
           type: string
         questionId:
@@ -436,19 +439,12 @@ components:
           type: string
         modified:
           type: string
-        answerType:
-          type: string
-          description: 'OBJECTIVE, GIST, ACTION_PLAN'
-        orderId:
-          type: string
-          description: 順番を保持する項目
       required:
         - answerHeadId
         - questionId
+        - orderId
         - answer
         - inserted
-        - answerType
-        - orderId
     AnswerHead:
       title: AnswerHead
       type: object
@@ -467,11 +463,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Answer'
-        toiId:
-          type: string
-        category:
-          type: string
-          description: 'Health, Amibiton, Relation, Money'
         userInfo:
           $ref: '#/components/schemas/BizToiUser'
         likeInfo:
