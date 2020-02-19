@@ -6,9 +6,9 @@ info:
     name: BizToi
   description: BizToi API
 servers:
-  - url: 'http://localhost:8000/api'
+  - url: 'http://localhost:8000'
 paths:
-  /books:
+  '/api/books':
     get:
       summary: Book List
       tags:
@@ -41,7 +41,7 @@ paths:
               $ref: '#/components/schemas/Book'
       tags:
         - biztoi
-  '/books/{book_id}':
+  '/api/books/{book_id}':
     parameters:
       - schema:
           type: string
@@ -63,7 +63,7 @@ paths:
           description: Not Found
       description: 本情報を取得する
       operationId: GetBookId
-  '/books/{book_id}/toi':
+  '/api/books/{book_id}/toi':
     parameters:
       - schema:
           type: string
@@ -101,7 +101,7 @@ paths:
               $ref: '#/components/schemas/Toi'
       tags:
         - biztoi
-  '/books/{book_id}/toi/questions':
+  '/api/books/{book_id}/questions':
     parameters:
       - schema:
           type: string
@@ -137,7 +137,7 @@ paths:
               $ref: '#/components/schemas/Question'
       tags:
         - biztoi
-  '/books/{book_id}/toi/questions/{question_id}':
+  '/api/books/{book_id}/questions/{question_id}':
     parameters:
       - schema:
           type: string
@@ -162,7 +162,7 @@ paths:
                 $ref: '#/components/schemas/Question'
       description: 本に紐づく質問を取得する（Storeに存在しなかった場合）
       operationId: GetBookQuestion
-  '/books/{book_id}/toi/answers':
+  '/api/books/{book_id}/answers':
     parameters:
       - schema:
           type: string
@@ -185,7 +185,33 @@ paths:
       tags:
         - biztoi
       parameters: []
-  '/books/{book_id}/toi/answers/me':
+  '/api/books/{book_id}/answers/{answer_id}':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: answer_id
+        in: path
+        required: true
+    get:
+      summary: GetAnswer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswerHead'
+      description: 回答ヘッダー+回答データの取得(Single)
+      operationId: GetAnswer
+      tags:
+        - biztoi
+      parameters: []
+  '/api/books/{book_id}/answers/me':
     parameters:
       - schema:
           type: string
@@ -225,7 +251,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswerHead'
-  '/books/{book_id}/toi/answers/me/{question_id}':
+  '/api/books/{book_id}/answers/me/{question_id}':
     parameters:
       - schema:
           type: string
@@ -274,7 +300,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AnswerList'
-  /users/me:
+  '/api/users/me':
     get:
       summary: User info
       tags:
@@ -289,7 +315,7 @@ paths:
       description: ユーザ情報
       parameters: []
       operationId: UserInfo
-  /auth/login:
+  '/api/auth/login':
     get:
       summary: Auth Login
       tags:
@@ -308,7 +334,7 @@ paths:
           description: リダイレクト対象URL
           required: true
       operationId: AuthLogin
-  /auth/token:
+  '/api/auth/token':
     get:
       summary: Auth Get Token
       tags:
@@ -329,7 +355,7 @@ paths:
           description: AWS Cognitoより返却される認証コード
           required: true
       operationId: AuthGetToken
-  /favorite/books:
+  '/api/favorite/books':
     post:
       summary: FavoriteBooks
       tags:
@@ -360,7 +386,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SendLikeInfo'
-  /likes/answers:
+  '/api/likes/answers':
     post:
       summary: LikesAnswers
       tags:
@@ -391,32 +417,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SendLikeInfo'
-  '/books/{book_id}/toi/answers/{answer_id}':
-    parameters:
-      - schema:
-          type: string
-        name: book_id
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: answer_id
-        in: path
-        required: true
-    get:
-      summary: GetAnswer
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AnswerHead'
-      description: 回答ヘッダー+回答データの取得(Single)
-      operationId: GetAnswer
-      tags:
-        - biztoi
-      parameters: []
 components:
   schemas:
     Answer:
@@ -450,6 +450,8 @@ components:
       type: object
       properties:
         id:
+          type: string
+        bookId:
           type: string
         userId:
           type: string
