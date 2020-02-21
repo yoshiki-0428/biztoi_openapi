@@ -523,10 +523,10 @@ components:
           type: string
           description: 例文
         step:
-          type: integer
+          type: string
         answerType:
           type: string
-          description: 'OBJECTIVE, GIST, ACTION_PLAN'
+          description: '0: OBJECTIVE, 1: GIST, 2: ACTION_PLAN'
         required:
           type: boolean
         nextQuestionId:
