@@ -511,9 +511,9 @@ components:
         id:
           type: string
         patternId:
-          type: number
+          type: integer
         orderId:
-          type: number
+          type: integer
           description: 順番を保証した項目        
         title:
           type: string
@@ -523,7 +523,7 @@ components:
           type: string
           description: 例文
         step:
-          type: number
+          type: integer
         answerType:
           type: string
           description: 'OBJECTIVE, GIST, ACTION_PLAN'
