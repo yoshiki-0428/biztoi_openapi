@@ -597,10 +597,13 @@ components:
         active:
           type: boolean
         sum:
-          type: number
+          type: integer
+        id:
+          type: string
       required:
         - active
         - sum
+        - id
     SendLikeInfo:
       title: SendLikeInfo
       type: object
