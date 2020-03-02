@@ -427,7 +427,7 @@ components:
         id:
           type: string
         orderId:
-          type: string
+          type: integer
           description: 順番を保持する項目
         answerHeadId:
           type: string
