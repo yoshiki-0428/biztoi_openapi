@@ -264,7 +264,7 @@ paths:
         in: path
         required: true
     get:
-      summary: GetAnswerByQuestion
+      summary: GetAnswerMeByQuestion
       responses:
         '200':
           description: OK
@@ -275,7 +275,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Answer'
       description: 質問に紐付いた回答データの取得（自ユーザ）
-      operationId: GetAnswerByQuestion
+      operationId: GetAnswerMeByQuestion
       tags:
         - biztoi
       parameters: []
