@@ -8,7 +8,7 @@ info:
 servers:
   - url: 'http://localhost:8000'
 paths:
-  '/api/books':
+  /api/books:
     get:
       summary: Book List
       tags:
@@ -180,12 +180,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AnswerHead'
-      description: 回答ヘッダー+回答データの取得
+      description: 指定した本の回答データリストを取得
       operationId: GetAnswers
       tags:
         - biztoi
       parameters: []
-  '/api/books/{book_id}/answers/{answer_id}':
+  '/api/books/{book_id}/answers/{answer_head_id}':
     parameters:
       - schema:
           type: string
@@ -194,7 +194,7 @@ paths:
         required: true
       - schema:
           type: string
-        name: answer_id
+        name: answer_head_id
         in: path
         required: true
     get:
@@ -206,7 +206,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswerHead'
-      description: 回答ヘッダー+回答データの取得(Single)
+      description: 指定した回答内容を取得する
       operationId: GetAnswer
       tags:
         - biztoi
@@ -219,16 +219,18 @@ paths:
         in: path
         required: true
     get:
-      summary: GetAnswerHeadsMe
+      summary: GetAnswerHeadMeList
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AnswerHead'
-      description: 回答ヘッダー+回答データの取得(自ユーザ)
-      operationId: GetAnswerHeadsMe
+                type: array
+                items:
+                  $ref: '#/components/schemas/AnswerHead'
+      description: ログインユーザの指定した本の回答一覧を取得する
+      operationId: GetAnswerHeadMeList
       tags:
         - biztoi
       parameters: []
@@ -251,11 +253,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswerHead'
-  '/api/books/{book_id}/answers/me/{question_id}':
+
+  '/api/books/{book_id}/answers/me/{answer_head_id}':
     parameters:
       - schema:
           type: string
         name: book_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: answer_head_id
+        in: path
+        required: true
+    get:
+      summary: GetAnswerHeadMe
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AnswerHead'
+      description: ログインユーザの指定した本の回答を取得する
+      operationId: GetAnswerHeadMe
+      tags:
+        - biztoi
+      parameters: []
+
+  '/api/books/{book_id}/answers/me/{answer_head_id}/{question_id}':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: answer_head_id
         in: path
         required: true
       - schema:
@@ -274,7 +310,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Answer'
-      description: 質問に紐付いた回答データの取得（自ユーザ）
+      description: ログインユーザの質問に紐付いた回答データを取得する
       operationId: GetAnswerMeByQuestion
       tags:
         - biztoi
@@ -290,7 +326,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Answer'
-      description: 質問に紐付いた回答データの作成（自ユーザ）
+      description: ログインユーザの質問に紐付いた回答データを作成する
       operationId: PostAnswer
       tags:
         - biztoi
@@ -300,7 +336,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AnswerList'
-  '/api/users/me':
+
+  /api/users/me:
     get:
       summary: User info
       tags:
@@ -315,7 +352,7 @@ paths:
       description: ユーザ情報
       parameters: []
       operationId: UserInfo
-  '/api/auth/login':
+  /api/auth/login:
     get:
       summary: Auth Login
       tags:
@@ -334,7 +371,7 @@ paths:
           description: リダイレクト対象URL
           required: true
       operationId: AuthLogin
-  '/api/auth/token':
+  /api/auth/token:
     get:
       summary: Auth Get Token
       tags:
@@ -355,7 +392,7 @@ paths:
           description: AWS Cognitoより返却される認証コード
           required: true
       operationId: AuthGetToken
-  '/api/favorite/books':
+  /api/favorite/books:
     post:
       summary: FavoriteBooks
       tags:
@@ -386,7 +423,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SendLikeInfo'
-  '/api/likes/answers':
+  /api/likes/answers:
     post:
       summary: LikesAnswers
       tags:
@@ -514,7 +551,7 @@ components:
           type: integer
         orderId:
           type: integer
-          description: 順番を保証した項目        
+          description: 順番を保証した項目
         title:
           type: string
         detail:
