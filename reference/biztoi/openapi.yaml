@@ -219,7 +219,7 @@ paths:
         in: path
         required: true
     get:
-      summary: GetAnswersMe
+      summary: GetAnswerHeadsMe
       responses:
         '200':
           description: OK
@@ -228,7 +228,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AnswerHead'
       description: 回答ヘッダー+回答データの取得(自ユーザ)
-      operationId: GetAnswersMe
+      operationId: GetAnswerHeadsMe
       tags:
         - biztoi
       parameters: []
