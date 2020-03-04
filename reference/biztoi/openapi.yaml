@@ -170,7 +170,7 @@ paths:
         in: path
         required: true
     get:
-      summary: GetAnswers
+      summary: GetAnswerHeadList
       responses:
         '200':
           description: OK
@@ -181,7 +181,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/AnswerHead'
       description: 指定した本の回答データリストを取得
-      operationId: GetAnswers
+      operationId: GetAnswerHeadList
       tags:
         - biztoi
       parameters: []
@@ -198,7 +198,7 @@ paths:
         in: path
         required: true
     get:
-      summary: GetAnswer
+      summary: GetAnswerHead
       responses:
         '200':
           description: OK
@@ -207,7 +207,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/AnswerHead'
       description: 指定した回答内容を取得する
-      operationId: GetAnswer
+      operationId: GetAnswerHead
       tags:
         - biztoi
       parameters: []
@@ -253,90 +253,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswerHead'
-
-  '/api/books/{book_id}/answers/me/{answer_head_id}':
-    parameters:
-      - schema:
-          type: string
-        name: book_id
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: answer_head_id
-        in: path
-        required: true
-    get:
-      summary: GetAnswerHeadMe
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/AnswerHead'
-      description: ログインユーザの指定した本の回答を取得する
-      operationId: GetAnswerHeadMe
-      tags:
-        - biztoi
-      parameters: []
-
-  '/api/books/{book_id}/answers/me/{answer_head_id}/{question_id}':
-    parameters:
-      - schema:
-          type: string
-        name: book_id
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: answer_head_id
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: question_id
-        in: path
-        required: true
-    get:
-      summary: GetAnswerMeByQuestion
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Answer'
-      description: ログインユーザの質問に紐付いた回答データを取得する
-      operationId: GetAnswerMeByQuestion
-      tags:
-        - biztoi
-      parameters: []
-    post:
-      summary: PostAnswerByQuestion
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Answer'
-      description: ログインユーザの質問に紐付いた回答データを作成する
-      operationId: PostAnswer
-      tags:
-        - biztoi
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AnswerList'
-
   /api/users/me:
     get:
       summary: User info
@@ -454,6 +370,86 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/SendLikeInfo'
+  '/api/books/{book_id}/answers/me/{answer_head_id}':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: answer_head_id
+        in: path
+        required: true
+    get:
+      summary: GetAnswerHeadMe
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswerHead'
+      description: ログインユーザの指定した本の回答を取得する
+      operationId: GetAnswerHeadMe
+      tags:
+        - biztoi
+      parameters: []
+  '/api/books/{book_id}/answers/me/{answer_head_id}/{question_id}':
+    parameters:
+      - schema:
+          type: string
+        name: book_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: answer_head_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: question_id
+        in: path
+        required: true
+    get:
+      summary: GetAnswerMeByQuestion
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Answer'
+      description: ログインユーザの質問に紐付いた回答データを取得する
+      operationId: GetAnswerMeByQuestion
+      tags:
+        - biztoi
+      parameters: []
+    post:
+      summary: PostAnswerMeByQuestion
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Answer'
+      description: ログインユーザの質問に紐付いた回答データを作成する
+      operationId: PostAnswerMeByQuestion
+      tags:
+        - biztoi
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnswerList'
 components:
   schemas:
     Answer:
