@@ -47,7 +47,6 @@ paths:
             default: '000'
           in: query
           name: booksGenreId
-          required: true
         - schema:
             type: string
           in: query
