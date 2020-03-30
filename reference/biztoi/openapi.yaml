@@ -490,8 +490,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Answer'
-      description: ログインユーザの質問に紐付いた回答データを作成する
+      description: 指定した回答データを登録更新する
       operationId: PostAnswerMeByQuestion
+      tags:
+        - biztoi
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnswerList'
+    delete:
+      summary: DeleteAnswerMeByQuestion
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Answer'
+      description: 指定した回答データを削除する
+      operationId: DeleteAnswerMeByQuestion
       tags:
         - biztoi
       parameters: []
