@@ -417,11 +417,10 @@ paths:
       tags:
         - biztoi
       parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AnswerList'
+      requestBody: {}
+      responses:
+        '200':
+          description: OK
   /api/books/favorite:
     get:
       summary: Book Favorite List
