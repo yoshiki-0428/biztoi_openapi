@@ -417,7 +417,11 @@ paths:
       tags:
         - biztoi
       parameters: []
-      requestBody: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnswerList'
       responses:
         '200':
           description: OK
