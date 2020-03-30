@@ -41,96 +41,6 @@ paths:
               $ref: '#/components/schemas/Book'
       tags:
         - biztoi
-  /api/books/favorite:
-    get:
-      summary: Book Favorite List
-      tags:
-        - biztoi
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
-              examples: {}
-      description: 本のお気に入り数を集計、多い順に本の情報を返却する
-      parameters: []
-      operationId: BookFavoriteList
-  /api/books/favorite/me:
-    get:
-      summary: User Book Favorite List
-      tags:
-        - biztoi
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
-              examples: {}
-      description: ユーザのお気に入り本のリストを返す
-      parameters: []
-      operationId: BookFavoriteListMe
-  /api/books/likes:
-    get:
-      summary: Book Likes List
-      tags:
-        - biztoi
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
-              examples: {}
-      description: 本に紐づく回答数を集計、多い順に本の情報を返却する
-      parameters: []
-      operationId: BookLikesList
-  /api/books/recommend:
-    get:
-      summary: Book Reccomend List
-      tags:
-        - biztoi
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
-              examples: {}
-      description: 回答している本がある場合、ジャンルを取得してそのジャンルのランキングをRakuten APIで返却する
-      parameters: []
-      operationId: BookRecommendList
-  /api/books/unfinished:
-    get:
-      summary: Book Unfinished List
-      tags:
-        - biztoi
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
-              examples: {}
-      description: 回答途中の本のリスト取得
-      parameters: []
-      operationId: BookUnfinishedList
   '/api/books/{book_id}':
     parameters:
       - schema:
@@ -502,15 +412,6 @@ paths:
               $ref: '#/components/schemas/AnswerList'
     delete:
       summary: DeleteAnswerMeByQuestion
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Answer'
       description: 指定した回答データを削除する
       operationId: DeleteAnswerMeByQuestion
       tags:
@@ -521,6 +422,96 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AnswerList'
+  /api/books/favorite:
+    get:
+      summary: Book Favorite List
+      tags:
+        - biztoi
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+              examples: {}
+      description: 本のお気に入り数を集計、多い順に本の情報を返却する
+      parameters: []
+      operationId: BookFavoriteList
+  /api/books/likes:
+    get:
+      summary: Book Likes List
+      tags:
+        - biztoi
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+              examples: {}
+      description: 本に紐づく回答数を集計、多い順に本の情報を返却する
+      parameters: []
+      operationId: BookLikesList
+  /api/books/favorite/me:
+    get:
+      summary: User Book Favorite List
+      tags:
+        - biztoi
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+              examples: {}
+      description: ユーザのお気に入り本のリストを返す
+      parameters: []
+      operationId: BookFavoriteListMe
+  /api/books/recommend:
+    get:
+      summary: Book Reccomend List
+      tags:
+        - biztoi
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+              examples: {}
+      description: 回答している本がある場合、ジャンルを取得してそのジャンルのランキングをRakuten APIで返却する
+      parameters: []
+      operationId: BookRecommendList
+  /api/books/unfinished:
+    get:
+      summary: Book Unfinished List
+      tags:
+        - biztoi
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+              examples: {}
+      description: 回答途中の本のリスト取得
+      parameters: []
+      operationId: BookUnfinishedList
 components:
   schemas:
     Answer:
