@@ -268,46 +268,6 @@ paths:
       description: ユーザ情報
       parameters: []
       operationId: UserInfo
-  /api/auth/login:
-    get:
-      summary: Auth Login
-      tags:
-        - biztoi
-      responses:
-        '200':
-          description: ''
-        '303':
-          description: See Other
-      description: ログイン画面に遷移
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: redirect_uri
-          description: リダイレクト対象URL
-          required: true
-      operationId: AuthLogin
-  /api/auth/token:
-    get:
-      summary: Auth Get Token
-      tags:
-        - biztoi
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Authorize'
-      description: アクセストークン取得
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: code
-          description: AWS Cognitoより返却される認証コード
-          required: true
-      operationId: AuthGetToken
   /api/favorite/books:
     post:
       summary: FavoriteBooks
