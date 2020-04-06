@@ -90,8 +90,58 @@ paths:
           name: NGKeyword
       tags:
         - RakutenBooksTotal
+  /BooksGenre/Search/20121128:
+    get:
+      summary: getBooksGenre
+      operationId: getBooksGenre
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenreInfo'
+      description: 楽天本検索APIエンドポイント
+      parameters:
+        - schema:
+            type: string
+            default: '1035252894012359396'
+          in: query
+          name: applicationId
+          required: true
+          description: ''
+        - schema:
+            type: string
+            default: json
+          in: query
+          name: format
+        - schema:
+            type: string
+            default: '000'
+          in: query
+          name: booksGenreId
+          required: true
+      tags:
+        - RakutenBooksTotal
+
 components:
   schemas:
+    GenreInfo:
+      type: object
+      title: ''
+      properties:
+        current:
+          type: object
+          properties:
+            booksGenreId:
+              type: string
+            booksGenreName:
+              type: string
+            genreLevel:
+              type: int
+        children:
+          type: object
+
     SearchInfo:
       type: object
       title: ''
