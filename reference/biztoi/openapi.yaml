@@ -24,7 +24,11 @@ paths:
                   $ref: '#/components/schemas/Book'
               examples: {}
       description: すべての本を取得
-      parameters: []
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: keyword
       operationId: Books
     parameters: []
     post:
