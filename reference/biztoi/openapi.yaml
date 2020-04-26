@@ -127,6 +127,11 @@ paths:
                   $ref: '#/components/schemas/Question'
       description: 本に紐づく質問一覧を取得する
       operationId: GetBookQuestions
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: pattern_id
     post:
       summary: ''
       responses:
@@ -164,6 +169,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Question'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: pattern_id
       description: 本に紐づく質問を取得する（Storeに存在しなかった場合）
       operationId: GetBookQuestion
   '/api/books/{book_id}/answers':
